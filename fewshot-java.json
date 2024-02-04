@@ -1,0 +1,45 @@
+[
+    {
+      "codeSnippet": "import numpy as np\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score\n\n# Load dataset\ndata = pd.read_csv('data.csv')\n\n# Preprocess data\nX = data.drop('target', axis=1)\ny = data['target']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Initialize and train the model\nmodel = RandomForestClassifier(n_estimators=100, random_state=42)\nmodel.fit(X_train, y_train)\n\n# Make predictions\npredictions = model.predict(X_test)\n\n# Evaluate the model\naccuracy = accuracy_score(y_test, predictions)\nprint('Accuracy:', accuracy)",
+      "skills": [
+        "Python (Programming Language)",
+        "Data Science",
+        "Machine Learning",
+        "NumPy",
+        "Pandas",
+        "Scikit-Learn",
+        "Data Preprocessing",
+        "Model Training",
+        "Model Evaluation"
+      ]
+    },
+    {
+      "codeSnippet": "const express = require('express');\nconst bodyParser = require('body-parser');\nconst mongoose = require('mongoose');\nconst app = express();\n\n// Middleware\napp.use(bodyParser.json());\n\n// Connect to MongoDB\nmongoose.connect('mongodb://localhost/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });\n\n// Define mongoose schema and model\nconst userSchema = new mongoose.Schema({\n    username: String,\n    email: String,\n    age: Number\n});\nconst User = mongoose.model('User', userSchema);\n\n// API endpoints\napp.post('/api/users', async (req, res) => {\n    try {\n        const user = new User(req.body);\n        await user.save();\n        res.status(201).json(user);\n    } catch (error) {\n        res.status(500).json({ error: 'Internal Server Error' });\n    }\n});",
+      "skills": [
+        "JavaScript (Programming Language)",
+        "Node.js",
+        "Express.js",
+        "RESTful API",
+        "MongoDB",
+        "Mongoose (ODM)",
+        "API Design",
+        "Asynchronous Programming",
+        "Error Handling"
+      ]
+    },
+    {
+      "codeSnippet": "@RestController\npublic class ProductController {\n\n    @Autowired\n    private ProductService productService;\n\n    @GetMapping("/products/{id}")\n    public ResponseEntity<Product> getProductById(@PathVariable Long id) {\n        Product product = productService.getProductById(id);\n        return ResponseEntity.ok(product);\n    }\n\n    // Other controller methods\n}",
+      "skills": [
+        "Java",
+        "Spring Framework",
+        "Spring Boot",
+        "RESTful API",
+        "Dependency Injection",
+        "Java Persistence API",
+        "API Design",
+        "Microservices",
+        "Error Handling"
+      ]
+    }
+  ]
+  
