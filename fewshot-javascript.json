@@ -1,45 +1,182 @@
 [
-   {
-      "codeSnippet":"const calculateSum = (num1, num2) => num1 + num2;",
-      "skills":[
-         "JavaScript (Programming Language)",
-         "Function",
-         "Problem Solving"
-      ]
-   },
-   {
-      "codeSnippet":"async function fetchData(url) {\n  try {\n    const response = await fetch(url);\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.error('Error fetching data:', error);\n  }\n}",
-      "skills":[
-         "JavaScript (Programming Language)",
-         "Asynchronous Javascript and XML (AJAX)",
-         "Error Handling",
-         "Web Development",
-         "RESTful API",
-         "Promises",
-         "Asynchronous JavaScript",
-         "Front End (Software Engineering)"
-      ]
-   },
-   {
-      "codeSnippet":"import React, { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  const increment = () => {\n    setCount(count + 1);\n  };\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={increment}>Increment</button>\n    </div>\n  );\n}",
-      "skills":[
-         "React.js (Javascript Library)",
-         "State Management",
-         "React Hooks",
-         "User Interface (UI) Design",
-         "Front End (Software Engineering)",
-         "Web Development"
-      ]
-   },
-   {
-      "codeSnippet":"const express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n  res.send('Hello, World!');\n});\n\napp.listen(port, () => {\n  console.log(`Server listening at http://localhost:${port}`);\n});",
-      "skills":[
-         "Node.js (Javascript Library)",
-         "Express.js",
-         "Server-Side",
-         "Web Development",
-         "Backend Development",
-         "RESTful API"
-      ]
-   }
+    {
+        "codeSnippet": "const calculateSum = (num1, num2) => num1 + num2;",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Function",
+            "Problem Solving"
+        ]
+    },
+    {
+        "codeSnippet": "async function fetchData(url) {\n  try {\n    const response = await fetch(url);\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.error('Error fetching data:', error);\n  }\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Asynchronous Javascript and XML (AJAX)",
+            "Error Handling",
+            "Web Development",
+            "RESTful API",
+            "Promises",
+            "Asynchronous JavaScript",
+            "Front End (Software Engineering)"
+        ]
+    },
+    {
+        "codeSnippet": "import React, { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  const increment = () => {\n    setCount(count + 1);\n  };\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={increment}>Increment</button>\n    </div>\n  );\n}",
+        "skills": [
+            "React.js (Javascript Library)",
+            "State Management",
+            "React Hooks",
+            "User Interface (UI) Design",
+            "Front End (Software Engineering)",
+            "Web Development"
+        ]
+    },
+    {
+        "codeSnippet": "const express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n  res.send('Hello, World!');\n});\n\napp.listen(port, () => {\n  console.log(`Server listening at http://localhost:${port}`);\n});",
+        "skills": [
+            "Node.js (Javascript Library)",
+            "Express.js",
+            "Server-Side",
+            "Web Development",
+            "Backend Development",
+            "RESTful API"
+        ]
+    },
+    {
+        "codeSnippet": "function addNumbers(num1, num2) {\n    return num1 + num2;\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Function",
+            "Problem Solving"
+        ]
+    },
+    {
+        "codeSnippet": "const fetchData = async (url) => {\n    try {\n        const response = await fetch(url);\n        const data = await response.json();\n        return data;\n    } catch (error) {\n        console.error('Error fetching data:', error);\n    }\n};",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Asynchronous Javascript and XML (AJAX)",
+            "Error Handling",
+            "Web Development",
+            "RESTful API",
+            "Promises",
+            "Asynchronous JavaScript",
+            "Front End (Software Engineering)"
+        ]
+    },
+    {
+        "codeSnippet": "class Counter {\n    constructor() {\n        this.count = 0;\n    }\n\n    increment() {\n        this.count++;\n    }\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Object Oriented Programming And Systems",
+            "Class",
+            "Software Engineering"
+        ]
+    },
+    {
+        "codeSnippet": "const express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n    res.send('Hello, World!');\n});\n\napp.listen(port, () => {\n    console.log(`Server listening at http://localhost:${port}`);\n});",
+        "skills": [
+            "Node.js (Javascript Library)",
+            "Express.js",
+            "Server-Side",
+            "Web Development",
+            "Backend Development",
+            "RESTful API"
+        ]
+    },
+    {
+        "codeSnippet": "const multiply = (num1, num2) => num1 * num2;",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Arrow Functions",
+            "Math Operations"
+        ]
+    },
+    {
+        "codeSnippet": "async function fetchData(url) {\n  try {\n    const response = await fetch(url);\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.error('Error fetching data:', error);\n  }\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Asynchronous Javascript and XML (AJAX)",
+            "Error Handling",
+            "Web Development",
+            "RESTful API",
+            "Promises",
+            "Asynchronous JavaScript",
+            "Front End (Software Engineering)"
+        ]
+    },
+    {
+        "codeSnippet": "class Square {\n  constructor(sideLength) {\n    this.sideLength = sideLength;\n  }\n\n  calculateArea() {\n    return this.sideLength ** 2;\n  }\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Object Oriented Programming And Systems",
+            "Class",
+            "Software Engineering"
+        ]
+    },
+    {
+        "codeSnippet": "const express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n  res.send('Hello, World!');\n});\n\napp.listen(port, () => {\n  console.log(`Server listening at http://localhost:${port}`);\n});",
+        "skills": [
+            "Node.js (Javascript Library)",
+            "Express.js",
+            "Server-Side",
+            "Web Development",
+            "Backend Development",
+            "RESTful API"
+        ]
+    },
+    {
+        "codeSnippet": "const sortArray = (arr) => arr.sort((a, b) => a - b);",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Array Sorting",
+            "Algorithmic Thinking"
+        ]
+    },
+    {
+        "codeSnippet": "const greetUser = (name) => `Hello, ${name}!`;",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Arrow Functions",
+            "String Templates"
+        ]
+    },
+    {
+        "codeSnippet": "function fetchUserData(userId) {\n  return fetch(`/api/users/${userId}`)\n    .then(response => response.json())\n    .then(data => data);\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Promises",
+            "Web Development",
+            "RESTful API",
+            "Async/Await",
+            "Backend Development"
+        ]
+    },
+    {
+        "codeSnippet": "class Rectangle {\n  constructor(length, width) {\n    this.length = length;\n    this.width = width;\n  }\n\n  calculateArea() {\n    return this.length * this.width;\n  }\n}",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Object Oriented Programming And Systems",
+            "Class",
+            "Software Engineering"
+        ]
+    },
+    {
+        "codeSnippet": "const express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/api/greet', (req, res) => {\n  res.json({ message: 'Welcome to the API!' });\n});\n\napp.listen(port, () => {\n  console.log(`Server listening at http://localhost:${port}`);\n});",
+        "skills": [
+            "Node.js (Javascript Library)",
+            "Express.js",
+            "Server-Side",
+            "Web Development",
+            "Backend Development",
+            "RESTful API"
+        ]
+    },
+    {
+        "codeSnippet": "const filterEvenNumbers = (numbers) => numbers.filter(number => number % 2 === 0);",
+        "skills": [
+            "JavaScript (Programming Language)",
+            "Array Filtering",
+            "Functional Programming"
+        ]
+    }
 ]
