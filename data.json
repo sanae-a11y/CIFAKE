@@ -1,0 +1,174 @@
+[
+    {
+        "codeSnippet": "package com.micro.customerservice.entity;\n\nimport jakarta.persistence.*;\nimport lombok.AllArgsConstructor;\nimport lombok.Data;\nimport lombok.NoArgsConstructor;\n\n@Entity\n@Data\n@AllArgsConstructor\n@NoArgsConstructor\npublic class Customer {\n\n    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String username;\n    private String email;\n\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Spring Data",
+            "Lombok"
+        ]
+    },
+    {
+        "codeSnippet": "spring.application.name=gateway-service\nserver.port=8888\nspring.cloud.discovery.enabled=true",
+        "includedSkills": [
+            "Spring Cloud",
+            "Cloud Gateway",
+            "Microservices"
+        ]
+    },
+    {
+        "codeSnippet": "spring.application.name=inventory-service\nserver.port=8082\nspring.cloud.discovery.enabled=true\nmanagement.endpoints.web.exposure.include=*\neureka.client.service-url.defaultZone=http://localhost:8761/eureka",
+        "includedSkills": [
+            "Spring Boot",
+            "Spring Cloud",
+            "Eureka",
+            "Cloud Discovery",
+            "Microservices"
+        ]
+    },
+    {
+        "codeSnippet": "@Configuration\n@EnableWebSecurity\n@EnableGlobalMethodSecurity(prePostEnabled = true)\npublic class SecurityConfig {\n\n    @Autowired\n    private JwtAuthenticationEntryPoint authenticationEntryPoint;\n\n    @Autowired\n    private JwtAuthenticationFilter  jwtAuthenticationFilter;\n\n    @Bean\n    PasswordEncoder passwordEncoder(){\n        return new BCryptPasswordEncoder();\n    }\n\n    @Bean\n    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n        http\n                .csrf().disable()\n                .exceptionHandling()\n                .authenticationEntryPoint(authenticationEntryPoint)\n                .and()\n                .sessionManagement()\n                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)\n                .and()\n                .authorizeRequests((authorize) -> authorize\n                        .requestMatchers(HttpMethod.GET, API+V1+ALL).permitAll()\n                        .requestMatchers(API+V1+AUTH+ALL).permitAll()\n                        .requestMatchers(SWAGGER_UI+ALL).permitAll()\n                        .requestMatchers(V3+API_DOCS+ALL).permitAll()\n                        .requestMatchers(ERROR).permitAll()\n                        .anyRequest()\n                        .authenticated()\n                );\n        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);\n        return http.build();\n    }\n\n    @Bean\n    public AuthenticationManager authenticationManager(\n            AuthenticationConfiguration authenticationConfiguration) throws Exception {\n        return authenticationConfiguration.getAuthenticationManager();\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Spring Security",
+            "JWT",
+            "Spring IOC"
+        ]
+    },
+    {
+        "codeSnippet": "@Configuration\npublic class SwaggerConfig {\n\n    private ApiInfo apiInfo(){\n        return new ApiInfo(\n                \"Spring Boot Blog REST APIs\",\n                \"Spring Boot Blog REST API Documentation\",\n                \"1\",\n                \"Terms of service\",\n                new Contact(\"Jooh Doe\", \"\", \"john.doe@gmail.com\"),\n                \"License of API\",\n                \"API license URL\",\n                Collections.emptyList()\n        );\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Spring Docs",
+            "Swagger",
+            "Spring IOC"
+        ]
+    },
+    {
+        "codeSnippet": "@RestController\n@RequestMapping(API + V1 + AUTH)\n@Tag(\n        name = \"APIs for Authentication\"\n)\npublic interface AuthController {\n    @PostMapping(value = {LOGIN, SIGN_IN})\n     ResponseEntity<JWTAuthResponseDto> login(@RequestBody LoginRequestDto loginDto);\n\n    @PostMapping(value = {REGISTER,SIGN_UP})\n    public ResponseEntity<String> register(@RequestBody RegisterRequestDto registerDto);\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Spring Web",
+            "Facade Pattern",
+            "Spring Security",
+            "JWT",
+            "Rest API",
+            "HTTP Protocol"
+        ]
+    },
+    {
+        "codeSnippet": "@Operation(\n            summary = \"Get All Categories REST API\",\n            description = \"Get All Categories REST API is used to fetch all the posts from the database\"\n    )\n    @ApiResponse(\n            responseCode = \"200\",\n            description = \"Http Status 200 SUCCESS\"\n    )\n    // Build Get All Categories REST API\n    @Override\n    public ResponseEntity<List<CategoryResponseDto>> getAll(){\n        return ResponseEntity.ok(categoryService.getAll ());\n    }",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Spring Web",
+            "Swagger",
+            "Spring Docs",
+            "Rest API",
+            "Web Services"
+        ]
+    },
+    {
+        "codeSnippet": "package com.javacraftsmanship.springcraftsmanship.repository;\n\nimport com.javacraftsmanship.springcraftsmanship.entity.Comment;\nimport org.springframework.data.jpa.repository.JpaRepository;\n\nimport java.util.List;\n\npublic interface CommentRepository extends JpaRepository<Comment, Long> {\n    public List<Comment> findByPostId(Long id);\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Spring Data",
+            "Repository Pattern"
+        ]
+    },
+    {
+        "codeSnippet": "@Service\n@AllArgsConstructor\npublic class CategoryServiceImpl implements CategoryService {\n\n    private CategoryRepository categoryRepository;\n    private CategoryMapper categoryMapper;\n\n    @Override\n    public CategoryResponseDto create(CategoryRequestDto categoryDto) {\n        Category category = categoryMapper.toCategory(categoryDto) ;\n        return categoryMapper.toCategoryResponseDto( categoryRepository.save(category));\n    }\n\n    @Override\n    public CategoryResponseDto getById(Long categoryId) {\n\n        Category category = categoryRepository.findById(categoryId)\n                .orElseThrow(() -> new ResourceNotFoundException(\"Category\", \"id\", categoryId.toString()));\n\n        return categoryMapper.toCategoryResponseDto(category);\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Facade Pattern",
+            "Service Pattern",
+            "Dependency Injection",
+            "Software Best Practices",
+            "Exception Handling"
+        ]
+    },
+    {
+        "codeSnippet": "public final class AppConstants {\n\n    private AppConstants() {}\n\n    public static final String DEFAULT_PAGE_SIZE = \"10\";\n    public static final String DEFAULT_PAGE_NUMBER = \"0\";\n    public static final String DEFAULT_SORT_BY = \"id\";\n    public static final String DEFAULT_SORT_DIRECTION = \"asc\";\n}",
+        "includedSkills": [
+            "Java",
+            "Software Best Practices"
+        ]
+    },
+    {
+        "codeSnippet": "import org.junit.jupiter.api.Nested;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.extension.ExtendWith;\nimport org.junit.jupiter.api.function.Executable;\nimport org.mockito.InjectMocks;\nimport org.mockito.Mock;\nimport org.mockito.junit.jupiter.MockitoExtension;\n\nimport java.math.BigDecimal;\nimport java.util.Collections;\nimport java.util.Date;\nimport java.util.List;\nimport java.util.Optional;\nimport java.util.stream.Collectors;\nimport java.util.stream.Stream;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertThrows;\nimport static org.mockito.ArgumentMatchers.any;\nimport static org.mockito.Mockito.*;\n\n@ExtendWith(MockitoExtension.class)\npublic class MoneyDepositServiceImplTest {\n\n    @InjectMocks\n    private MoneyDepositServiceImpl moneyDepositService;\n\n    @Mock\n    private MoneyDepositMapper moneyDepositMapper;\n\n    @Mock\n    private MoneyDepositRepository moneyDepositRepository;\n\n\n    @Mock\n    private AccountRepository accountRepository;\n\n    @Mock\n    private AuditService auditService;\n\n\n    @Test\n    void getAllMoneyDepositsShouldReturnMoneyDeposits() {\n\n        MoneyDepositResponseDto moneyDepositResponseDto = MoneyDepositResponseDto.builder()\n                .motif(\"testMotif\")\n                .amount(new BigDecimal(1000))\n                .dateExecution(new Date())\n                .fullNameTransmitter(\"John Doe\")\n                .nrAccountBeneficiary(\"123456789\")\n                .build();\n\n        when(moneyDepositMapper.toMoneyDepositResponseDtoList(any())).thenReturn(Stream.of( moneyDepositResponseDto)\n                .collect(Collectors.toList()));\n\n        List<MoneyDepositResponseDto> result = moneyDepositService.getAllDeposits();\n\n        verify(moneyDepositRepository, times(1)).findAll();\n        assertEquals(1, result.size());\n        assertEquals(\"testMotif\", result.get(0).getMotif());\n        assertEquals(new BigDecimal(1000), result.get(0).getAmount());\n        assertEquals(\"123456789\", result.get(0).getNrAccountBeneficiary());\n        assertEquals(\"said aabilla\", result.get(0).getFullNameTransmitter());\n\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Junit5",
+            "Mockito",
+            "Unit Testing",
+            "Builder Pattern"
+        ]
+    },
+    {
+        "codeSnippet": "@Slf4j\n@Aggregate\npublic class OrderAggregate {\n    @AggregateIdentifier\n    private String orderId;\n    private String userId;\n    private BigDecimal amount;\n    private OrderStatus orderStatus;\n\n    public OrderAggregate() {\n\n    }\n\n    @CommandHandler\n    public OrderAggregate(CreateOrderCommand createOrderCommand) {\n        log.info(\"CreateOrderCommand received\");\n        AggregateLifecycle.apply(new OrderCreatedEvent(createOrderCommand.orderId(),\n                createOrderCommand.userId(),\n                createOrderCommand.amount(),\n                OrderStatus.ORDER_CREATED));\n    }\n\n    @EventSourcingHandler\n    public void on(OrderCreatedEvent orderCreatedEvent) {\n        log.info(\"OrderCreatedEvent occurred\");\n\n        this.orderId = orderCreatedEvent.orderId();\n        this.userId = orderCreatedEvent.userId();\n        this.amount = orderCreatedEvent.amount();\n        this.orderStatus = orderCreatedEvent.orderStatus();\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Axon Framework",
+            "Event Sourcing",
+            "CQRS Pattern",
+            "Domain Driven Design"
+        ]
+    },
+    {
+        "codeSnippet": "   @Bean\n    public Declarables bindings() {\n        List<Binding> bindingList = this.bindings.stream()\n                .map(binding -> new Binding(binding.getQueue(), Binding.DestinationType.QUEUE, binding.getExchange(), binding.getRoutingKey(), null))\n                .toList();\n        return new Declarables(bindingList.toArray(new Binding[0]));\n    }\n\n    @Bean\n    public Jackson2JsonMessageConverter converter() {\n        return new Jackson2JsonMessageConverter();\n    }\n\n    @Bean\n    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, Jackson2JsonMessageConverter converter) {\n        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);\n        rabbitTemplate.setMessageConverter(converter);\n        return rabbitTemplate;\n    }",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "RabbitMQ",
+            "Event Driven Architecture",
+            "Microservices",
+            "Spring IOC"
+        ]
+    },
+    {
+        "codeSnippet": "@RequiredArgsConstructor\n@Component\npublic class OrderEventPublisher {\n    @Value(\"${amqp.exchange.order_events}\")\n    private String orderEventsExchange;\n    @Value(\"${amqp.routingKey.order_created_events}\")\n    private String orderPlacedRoutingKey;\n\n    private final RabbitTemplate rabbitTemplate;\n\n    public void publishOrderCreatedEvent(OrderCreatedEventDTO eventDto) {\n        rabbitTemplate.convertAndSend(orderEventsExchange, orderPlacedRoutingKey, eventDto);\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "RabbitMQ",
+            "Event Driven Architecture",
+            "Microservices"
+        ]
+    },
+    {
+        "codeSnippet": "@SpringBootTest\n@AutoConfigureMockMvc\npublic class UserControllerIntegrationTest {\n\n    @Autowired\n    private MockMvc mockMvc;\n\n    @Test\n    public void testGetUserById() throws Exception {\n        mockMvc.perform(get(\"/users/{id}\", 1)\n                .contentType(MediaType.APPLICATION_JSON))\n                .andExpect(status().isOk())\n                .andExpect(content().contentType(MediaType.APPLICATION_JSON))\n                .andExpect(jsonPath(\"$.id\").value(1))\n                .andExpect(jsonPath(\"$.name\").value(\"John Doe\"))\n                .andExpect(jsonPath(\"$.email\").value(\"john@example.com\"));\n    }\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Integration Testing",
+            "JUnit5"
+        ]
+    },
+    {
+        "codeSnippet": "import org.springframework.cloud.openfeign.FeignClient;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PathVariable;\n\nimport java.util.List;\n\n@FeignClient(name = \"github-api\", url = \"${api.client.url.github}\", configuration = FeignConfig.class)\npublic interface GithubClient {\n\n    @GetMapping(\"/users/{username}\")\n    User getUser(@PathVariable(\"username\") String username);\n\n    @GetMapping(\"/users/{username}/repos\")\n    List<Repo> getRepos(@PathVariable(\"username\") String username);\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "FeignClient",
+            "Spring Cloud",
+            "Microservices"
+        ]
+    },
+    {
+        "codeSnippet": "@When(\"^the client calls /version$\")\npublic void the_client_issues_GET_version() throws Throwable{\n    executeGet(\"http://localhost:8080/version\");\n}\n\n@Then(\"^the client receives status code of (\\d+)$\")\npublic void the_client_receives_status_code_of(int statusCode) throws Throwable {\n    HttpStatus currentStatusCode = latestResponse.getTheResponse().getStatusCode();\n    assertThat(\"status code is incorrect : \"+ \n    latestResponse.getBody(), currentStatusCode.value(), is(statusCode));\n}\n\n@And(\"^the client receives server version (.+)$\")\npublic void the_client_receives_server_version_body(String version) throws Throwable {\n    assertThat(latestResponse.getBody(), is(version));\n}",
+        "includedSkills": [
+            "Java",
+            "Spring Boot",
+            "Acceptance Tests",
+            "JUnit5",
+            "Cucumber",
+            "Behavior Driven Development"
+        ]
+    }
+]
